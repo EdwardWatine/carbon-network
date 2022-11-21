@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script src="business.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"
+    />
+    <link rel="stylesheet" type="text/css" href="business.css" />
+    <title>Carbon Network</title>
+  </head>
+  <body>
+    <div id="blackout">
+      <div id="modal_supplier" class="modal">
+        <div class="modal_title">
+          <h1>Supplier Information</h1>
+        </div>
+        <div class="splitter">
+          <div class="col">
+            <div class="row header">
+              <div class="label">Supplier Name:</div>
+              <input type="text" id="name_supplier" />
+            </div>
+            <div class="row header">Address Information</div>
+            <div class="row">
+              <div class="label">Supplier Address:</div>
+              <input type="text" id="address_supplier" />
+            </div>
+            <div class="row">
+              <div class="label">Supplier Postcode:</div>
+              <input type="text" id="postcode_supplier" />
+            </div>
+            <div class="row header">Product Information</div>
+            <div class="row">
+              <div class="label">Product Name:</div>
+              <input type="text" id="product_supplier" />
+            </div>
+            <div class="row">
+              <div class="label">Kilograms bought per year:</div>
+              <input type="number" id="load_supplier" />
+            </div>
+
+            <div class="row header">CO&#x2082; Information</div>
+            <div class="row">
+              <div class="label">
+                CO&#x2082;eq(g) produced per kg of raw product:
+              </div>
+              <input type="number" id="co2_supplier" />
+            </div>
+            <div class="row">
+              <div class="label">
+                CO&#x2082;eq(g) produced per kg of product used:
+              </div>
+              <input type="number" id="usage_supplier" />
+            </div>
+            <div class="row">
+              <div class="label">
+                CO&#x2082;eq(g) produced per kg for delivery:
+              </div>
+              <input type="number" id="delivery_supplier" />
+              <button onclick="detdel()">Estimate</button>
+            </div>
+            <div class="stretch"></div>
+            <div class="buttonrow">
+              <button onclick="addSupplier()">Add</button>
+              <div class="pad"></div>
+              <button class="remove" onclick="removeModal()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="modal_customer" class="modal"></div>
+    </div>
+    <div id="big">
+      <div id="panel">
+        <div id="title">
+          <h1>Business Information</h1>
+        </div>
+        <div id="info">
+          <div class="row header">
+            <div class="label">Business Name:</div>
+            <input
+              type="text"
+              class="stretch"
+              id="name"
+              onchange="updateName(event)"
+            />
+          </div>
+          <div class="row header">Address Information</div>
+          <div class="row">
+            <div class="label">Address:</div>
+            <input type="text" class="stretch" id="address" />
+          </div>
+          <div class="row">
+            <div class="label">Postal Code:</div>
+            <input type="text" id="postcode" />
+            <div class="stretch"></div>
+            <button onclick="locateAddress(event)">Locate</button>
+          </div>
+          <div class="row header">Supply Chain</div>
+          <div class="row">
+            <div
+              id="supply"
+              class="tab stretch selected"
+              onclick="selectSupply()"
+            >
+              <div class="text">Suppliers</div>
+            </div>
+            <div id="customer" class="tab stretch" onclick="selectCustomer()">
+              <div class="text">Customers</div>
+            </div>
+          </div>
+          <div id="dinfo" class="stretch"></div>
+          <div id="brow">
+            <button class="remove" onclick="remove()" disabled>Remove</button>
+            <button class="edit" onclick="edit()" disabled>Edit</button>
+            <button class="add" onclick="add()">Add</button>
+          </div>
+        </div>
+      </div>
+      <div id="mapContainer">
+        <div id="collapse" onclick="collapse()">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
